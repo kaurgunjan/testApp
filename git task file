@@ -1,0 +1,41 @@
+*Set username and email 
+git config --global user.name "kaurgunjan"
+git config --global user.email "gunjan.enbake@gmail.com"
+
+
+git remote add origin https://github.com/kaurgunjan/testApp.git
+
+*create a new branch
+git checkout -b user
+ 
+*Checkout to new branch
+git checkout user
+
+*commit your work
+git init 
+git status
+git add .
+git commit -m "my first commit"
+
+*Push your code on github
+git push origin master
+
+*Move to master branch.
+git checkout master
+
+*Merge the new branch and ‘master’ branch
+git merge user
+git push origin master
+
+*Revert your last commit
+git revert branchCode
+
+*Rebase your branch
+git rebase user
+
+*Stash your changes
+git stash 
+git stash apply
+
+*Delete your new branch
+git branch -d user
