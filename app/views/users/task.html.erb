@@ -29,7 +29,7 @@
         $('#WindowHeight').html($(window).height());
 
     $("#image1").hover(function(){
-    	$(this).attr('src','jquery.png'); 
+    	$('#image1').attr( "src" , "<%= image_path "jquery.png"%>" );
     });
     $("#button1").click(function(){
     	$(this).css('background-color','blue');
