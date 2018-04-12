@@ -84,7 +84,8 @@
     });
 
     $("#urltoiframe").click(function(){
-    	$("iframe").attr('src', $("#url").val())
+    	var url = $("#url").val();
+    	$("iframe").attr('src', url);
     })
 	
 	})
