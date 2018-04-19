@@ -1,59 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<!-- <meta charset="UTF-8"> -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 <script>
 	$(document).ready(function(){
 	    if (navigator.userAgent.search("MSIE") >= 0) {
-            $('#Browser').html("Browser is InternetExplorer");
+            $('#Browser').val("Browser is InternetExplorer");
         }
         //Check if browser is Chrome or not
         else if (navigator.userAgent.search("Chrome") >= 0) {
-            $('#Browser').html("Browser is Chrome");
+            $('#Browser').val("Browser is Chrome");
         }
         //Check if browser is Firefox or not
         else if (navigator.userAgent.search("Firefox") >= 0) {
-            $('#Browser').html("Browser is FireFox");
+            $('#Browser').val("Browser is FireFox");
         }
         //Check if browser is Safari or not
         else if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
-            $('#Browser').html("Browser is Safari");
+            $('#Browser').val("Browser is Safari");
         }
         //Check if browser is Opera or not
         else if (navigator.userAgent.search("Opera") >= 0) {
-            $('#Browser').html("Browser is Opera");
+            $('#Browser').val("Browser is Opera");
         }
-        $('#WindowWidth').html($(window).width());
-        $('#WindowHeight').html($(window).height());
+        $('#WindowWidth').val($(window).width());
+        $('#WindowHeight').val($(window).height());
 
-    $("#image1").hover(function(){
-    	$('#image1').attr( "src" , "<%= image_path "jquery.png"%>" );
-    });
-    $("#button1").click(function(){
-    	$(this).css('background-color','blue');
-    });
-	
-	var slideIndex = 0;
-	showSlides();
-
-	function showSlides() {
-	    var i;
-	    var slides = document.getElementsByClassName("mySlides");
-	    var dots = document.getElementsByClassName("dot");
-	    for (i = 0; i < slides.length; i++) {
-	       slides[i].style.display = "none";  
-	    }
-	    slideIndex++;
-	    if (slideIndex > slides.length) {slideIndex = 1}    
-	    for (i = 0; i < dots.length; i++) {
-	        dots[i].className = dots[i].className.replace(" active", "");
-	    }
-	    slides[slideIndex-1].style.display = "block";  
-	    dots[slideIndex-1].className += " active";
-	    setTimeout(showSlides, 2000); // Change image every 2 seconds
-	}
 
 	function checkPassword(str)
 	{
@@ -71,6 +48,7 @@
 	     	if(!checkPassword(form.password.value)) {
 	        alert("The password you have entered is not valid!, Your Password must be of Minimum 6 characters, Capital letter, small letter, special character");
 	        form.password.focus();
+	        return false;
 	        }
 	    	else{
 	    		alert("All Validations true");
@@ -83,11 +61,13 @@
     	return true;
     });
 
-    $("#urltoiframe").click(function(){
+    $("#urltoiframe").click(function(e){
+    	e.preventDefault();
     	var url = $("#url").val();
-    	$("iframe").attr('src', url);
-    })
-	
+    	$("#iframe").attr('src', url);
+    });
+
+		
 	})
 
 
@@ -98,202 +78,129 @@
 		border: none;
 		padding: 14px 40px;
 	}
-	* {box-sizing: border-box}
-	body {font-family: Verdana, sans-serif; margin:0}
-	.mySlides {display: none}
-	img {vertical-align: middle;}
-
-	/* Slideshow container */
-	.slideshow-container {
-	  max-width: 1000px;
-	  position: relative;
-	  margin: auto;
+	.required:after {
+	   	padding-right: 25px;
+		background-image: url(...);
+		background-position: right top; 
+		content:" *";
+		color: red;
 	}
-
-	/* Next & previous buttons */
-	.prev, .next {
-	  cursor: pointer;
-	  position: absolute;
-	  top: 50%;
-	  width: auto;
-	  padding: 16px;
-	  margin-top: -22px;
-	  color: white;
-	  font-weight: bold;
-	  font-size: 18px;
-	  transition: 0.6s ease;
-	  border-radius: 0 3px 3px 0;
+	h3{
+		color: pink;
 	}
-
-	/* Position the "next button" to the right */
-	.next {
-	  right: 0;
-	  border-radius: 3px 0 0 3px;
-	}
-
-	/* On hover, add a black background color with a little bit see-through */
-	.prev:hover, .next:hover {
-	  background-color: rgba(0,0,0,0.8);
-	}
-
-	/* Caption text */
-	.text {
-	  color: #f2f2f2;
-	  font-size: 15px;
-	  padding: 8px 12px;
-	  position: absolute;
-	  bottom: 8px;
-	  width: 100%;
-	  text-align: center;
-	}
-
-	/* Number text (1/3 etc) */
-	.numbertext {
-	  color: #f2f2f2;
-	  font-size: 12px;
-	  padding: 8px 12px;
-	  position: absolute;
-	  top: 0;
-	}
-
-	/* The dots/bullets/indicators */
-	.dot {
-	  cursor: pointer;
-	  height: 15px;
-	  width: 15px;
-	  margin: 0 2px;
-	  background-color: #bbb;
-	  border-radius: 50%;
-	  display: inline-block;
-	  transition: background-color 0.6s ease;
-	}
-
-	.active, .dot:hover {
-	  background-color: #717171;
-	}
-
-	/* Fading animation */
-	.fade {
-	  -webkit-animation-name: fade;
-	  -webkit-animation-duration: 1.5s;
-	  animation-name: fade;
-	  animation-duration: 1.5s;
-	}
-
-	@-webkit-keyframes fade {
-	  from {opacity: .4} 
-	  to {opacity: 1}
-	}
-
-	@keyframes fade {
-	  from {opacity: .4} 
-	  to {opacity: 1}
-	}
-
-	/* On smaller screens, decrease text size */
-	@media only screen and (max-width: 300px) {
-	  .prev, .next,.text {font-size: 11px}
-	}
-
 </style>
 </head>
 <body>
 	<div align="center">
-	<p >
-	<h3>Web Browser Information</h3>
-	Browser is <div id="Browser"></div>
-	Width is <div id="WindowWidth"></div>
-	Height is <div id="WindowHeight"></div>	</p>
+		<h3>Your Browser Information</h3>
+		<div class="row">
+			<div class="col">
+			</div>
+			<div class="col">
+			</div>
+		    <div class="col">
+		    	<label for="Browser" >Browser</label>
+		    	<input type="text" id="Browser" disabled="disabled">
+		    </div>
+		    <div class="col">
+		    	<label for="WindowWidth" >Width</label>
+		    	<input type="text" id="WindowWidth" disabled="disabled">
+		    </div>
+		    <div class="col">
+		    	<label for="WindowHeight" >Height</label>
+		    	<input type="text" id="WindowHeight" disabled="disabled">
+			</div>
+			<div class="col">
+			</div>
+			<div class="col">
+			</div>
+		</div>
 	</div>
 
-	<p><h3>Image Hover Task</h3>
-	<%= image_tag("html.png", :height => 100, :id => "image1" ) %>
-	<br>
-	</p>
-
-	<div  align="right" >
-	<p><h3>Button Click Colour Change</h3>
-	<button id="button1"> Click Me</button></p>
-	</div>
-
-	<h3  align="center" >SlideShow</h3>
-	<div align="center" class="slideshow-container">
-	<div class="mySlides fade">
-	  <div class="numbertext">1 / 3</div>
-	  <%= image_tag("css.jpg", :width => 900, :height => 400 ) %>
-	  <div class="text">Caption Text</div>
-	</div>
-
-	<div class="mySlides fade">
-	  <div class="numbertext">2 / 3</div>
-	  <%= image_tag("jquery.png", :width => 500, :height => 400 ) %>
-	  <div class="text">Caption Two</div>
-	</div>
-
-	<div class="mySlides fade">
-	  <div class="numbertext">3 / 3</div>
-	  <%= image_tag("html.png", :width => 300, :height => 400 ) %>
-	  <div class="text">Caption Three</div>
-	</div>
-
-	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-	<a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-	</div>
-	<br>
-
-	<div style="text-align:center">
-	  <span class="dot" onclick="currentSlide(1)"></span> 
-	  <span class="dot" onclick="currentSlide(2)"></span> 
-	  <span class="dot" onclick="currentSlide(3)"></span> 
-	</div>
-
-
-	<h3>Form with validations</h3>
 	<form id="form">
 	<section>
-		<p><label for="fname">First Name</label>
-		<input type="text" name="fname" required pattern="[a-zA-Z]{5,}" title="Minimum 5 letters"></p>
+		<div class="form-group row">
+		    <div class="col">
+		    	<label for="firstname" class="required">First Name</label>
+		      	<input type="text" class="form-control" id="firstname" placeholder="First name" required pattern="[a-zA-Z]{1,}" title="Only Alphabets" required>
+		    </div>
+		    <div class="col">
+		    	<label for="middlename">Middle Name</label>
+		      	<input type="text" class="form-control" id="middlename" placeholder="Middle name" pattern="[a-zA-Z]{1,}" title="Only Alphabets">
+		    </div>
+		    <div class="col">
+		    	<label for="lastname">Last Name</label>
+		      	<input type="text" class="form-control" id="lastname" placeholder="Last name" pattern="[a-zA-Z]{1,}" title="Only Alphabets">
+		    </div>
+		    <div class="col">
+		    </div>
+		</div>
+		<br>
+		<div class="form-group row">
+		    <div class="col">
+		    	<label for="email" class="required">Email Address</label>
+		    	<input type="email" class="form-control" id="email" placeholder="Enter Your Email" required>
+		    </div>
+		    <div class="col">
+		    </div>
+		    <div class="col">
+		    </div>
+		    <div class="col">
+		    </div>
+		</div>
+		<div class="form-group row">
+		    <div class="col">
+		    	<label for="password" class="required">Password</label>
+		    	<input type="password" class="form-control" id="password" placeholder="Enter Your Password" required>
+		    </div>
+		    <div class="col">
+		       	<label for="cpassword" class="required">Confirm Password</label>
+		    	<input type="password" class="form-control" id="cpassword" placeholder="Retype Your Password" required>
+		    </div>
+		    <div class="col">
+		    </div>
+		    <div class="col">
+		    </div>
+		</div>
+		</section>
 
-		<p><label for="mname"> Middle Name  </label>
-		<input type="text" name="mname" pattern="[a-zA-Z]{1,}"></p>
-
-		<p><label for="lname">Last Name  </label>
-		<input type="text" name="lname" pattern="[a-zA-Z]{1,}"></p>
-
-		<p><label for="email"> Email</label>
-		<input id="email" type="email" name="email" required></p>
-
-		<p><label for="password"> Password</label>
-		<input type="password" name="password" required pattern=".{6,}" title="Six or more characters"></p>
-
-		<p><label for="cpassword"> Confirm Password</label>
-		<input type="password" name="cpassword" required pattern=".{6,}" title="Six or more characters"></p>
-
-	</section>
-
-	<section>
-		<p><label for="caddress"> Current Address</label>
-		<textarea rows="4" cols="50" id="caddress" form="form">Enter Address here...</textarea></p>
-	
-		<p>
-		<label for="paddress"> Permanent Address</label>
-		<textarea rows="4" cols="50" id="paddress" form="form"></textarea>
-		<input type="checkbox" id="address">same as Current Address</p>
-	</section>
-
-	<section>
-		<p><input id="submit" type="submit"></p>
-	</section>
+		<section>
+		<div class="form-group row">
+			<div class="col">
+		       	<label for="caddress"> Current Address</label>
+				<textarea rows="4" cols="50" id="caddress" required placeholder="Enter Current Address"></textarea>
+		    </div>
+		    <div class="col">
+		       	<label for="paddress"> Permanent Address</label> <input type="checkbox" id="address">same as Current Address
+				<textarea rows="4" cols="50" id="paddress" required placeholder="Enter Current Address"></textarea>
+			</div>
+		    <div class="col">
+		    	
+		    </div>
+		</div>
+		</section>
+		<div class="form-group row">
+			<div class="col">
+		       	
+		    </div>
+		    <div class="col">
+		       	<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		    <div class="col">
+		    	
+		    </div>
+		</div>
+		
 	</form>
 
+
 	<h3>Iframe</h3>
-	<p><iframe id="iframe" src=""></iframe></p>
+	<p><iframe id="iframe" src="http://www.youtube.com/embed/Q5im0Ssyyus""></iframe></p>
 	<p>
 	<input type="url" id="url">
 	<button id="urltoiframe"> Enter Url n click</button>
+	<!-- <p><a href="http://www.youtube.com/embed/Q5im0Ssyyus" class="myButtons">Charlie 1</a></p> -->
 	</p>
-
 
 </body>
 </html>
